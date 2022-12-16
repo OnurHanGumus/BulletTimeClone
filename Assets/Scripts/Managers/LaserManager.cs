@@ -79,7 +79,9 @@ namespace Managers
             {
                 if (hit.collider)
                 {
+                    PlayerSignals.Instance.onSlowMo?.Invoke(hit.collider.CompareTag("Enemy"));
                     _lRenderer.SetPosition(1, hit.point);
+
                 }
             }
             else

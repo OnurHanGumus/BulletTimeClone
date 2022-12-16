@@ -27,6 +27,7 @@ namespace Controllers
         private bool _isGameOver = false;
 
         private bool _isRight = false;
+        private bool _isSlowMo = false;
 
 
 
@@ -58,6 +59,12 @@ namespace Controllers
         {
             if (_isNotStarted)
             {
+                return;
+            }
+            if (_isSlowMo)
+            {
+                _rig.angularVelocity = Vector3.zero;
+                Debug.Log("merhaba");
                 return;
             }
             _rig.AddRelativeTorque(new Vector3(0, 0, _data.Speed * (_isRight ? 1 : -1)),ForceMode.Impulse);
@@ -113,6 +120,10 @@ namespace Controllers
         public void OnLevelSuccess()
         {
             _isGameOver = true;
+        }
+        public void OnSlowMo(bool state)
+        {
+            _isSlowMo = state;
         }
         public void OnReset()
         {
