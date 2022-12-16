@@ -57,6 +57,7 @@ namespace Managers
             CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
             CoreGameSignals.Instance.onLevelFailed += _movementController.OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful += _movementController.OnLevelSuccess;
+            InputSignals.Instance.onClicked += _movementController.OnClicked;
 
         }
 
@@ -68,6 +69,7 @@ namespace Managers
             CoreGameSignals.Instance.onRestartLevel -= OnResetLevel;
             CoreGameSignals.Instance.onLevelFailed -= _movementController.OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful -= _movementController.OnLevelSuccess;
+            InputSignals.Instance.onClicked -= _movementController.OnClicked;
         }
 
 

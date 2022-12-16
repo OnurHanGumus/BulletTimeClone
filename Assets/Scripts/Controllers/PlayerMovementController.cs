@@ -23,7 +23,7 @@ namespace Controllers
 
         private bool _isClicked = false;
 
-        private bool _isNotStarted = false;
+        private bool _isNotStarted = true;
         private bool _isGameOver = false;
 
         private bool _isRight = false;
@@ -48,20 +48,44 @@ namespace Controllers
 
         private void FixedUpdate()
         {
-            MovePlayer();
+            RotatePlayer();
+            AddForceToPlayer();
         }
 
-        private void MovePlayer()
+        
+
+        private void RotatePlayer()
         {
             if (_isNotStarted)
             {
                 return;
             }
+            _rig.AddRelativeTorque(new Vector3(0, 0, _data.Speed * (_isRight ? 1 : -1)),ForceMode.Impulse);
+        }
+
+        private void AddForceToPlayer()
+        {
+            if (!_isClicked)
+            {
+                return;
+            }
+            _isClicked = false;
+
+            _rig.velocity = new Vector3(0, 0);
+            if (transform.eulerAngles.z > 0 && transform.eulerAngles.z < 90)
+            {
+                _rig.AddForce(new Vector3(_data.ForceX, _data.ForceY, 0), ForceMode.Impulse);
+            }
+            else if (transform.eulerAngles.z > 90 && transform.eulerAngles.z < 180)
+            {
+                _rig.AddForce(new Vector3(-_data.ForceX, _data.ForceY, 0), ForceMode.Impulse);
+
+            }
             else
             {
-                //_rig.velocity = n
-                _rig.angularVelocity = new Vector3(_rig.angularVelocity.x, _rig.angularVelocity.y, _data.Speed * (_isRight ? 1 : -1));
+
             }
+
         }
 
 
@@ -75,14 +99,11 @@ namespace Controllers
         {
             _isClicked = false;
         }
-        public void OnPlayPressed()
-        {
-            _isNotStarted = false;
-        }
+
 
         public void OnPlay()
         {
-            //_isNotStarted = false;
+            _isNotStarted = false;
 
         }
         public void OnLevelFailed()

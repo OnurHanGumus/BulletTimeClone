@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: CD_Player
   m_EditorClassIdentifier: 
   Data:
-    Speed: 5
+    Speed: 81.34
+    ForceX: 3
+    ForceY: 10
