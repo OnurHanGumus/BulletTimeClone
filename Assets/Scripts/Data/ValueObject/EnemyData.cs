@@ -7,5 +7,6 @@ namespace Data.ValueObject
     public class EnemyData
     {
         public int Health = 50;
+        public float HealthBarPosY = 1.5f;
     }
 }

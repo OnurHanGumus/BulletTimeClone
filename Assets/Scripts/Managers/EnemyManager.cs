@@ -20,7 +20,7 @@ namespace Managers
         #endregion
 
         #region Serialized Variables
-        [SerializeField] private HealthBarManager healthBarManager;
+        [SerializeField] private AbstractHealthBar healthBarManager;
         #endregion
 
         #region Private Variables
@@ -50,7 +50,7 @@ namespace Managers
             _data = GetData();
             Health = _data.Health;
         }
-        public EnemyData GetData() => Resources.Load<CD_Enemy>("Data/EnemyData").Data;
+        public EnemyData GetData() => Resources.Load<CD_Enemy>("Data/CD_Enemy").Data;
 
         #region Event Subscription
 
@@ -79,7 +79,6 @@ namespace Managers
         public void GetDamage()
         {
             Health -= 10;
-            Debug.Log(Health);
             healthBarManager.SetHealthBarScale(Health);
             if (Health <= 0 && !_isDead)
             {
@@ -96,9 +95,6 @@ namespace Managers
         {
 
         }
-
-        
-
         private void OnResetLevel()
         {
 

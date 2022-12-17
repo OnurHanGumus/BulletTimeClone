@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 
-public class HealthBarManager : MonoBehaviour
+public abstract class AbstractHealthBar : MonoBehaviour
 {
     #region Self Variables
 
@@ -14,9 +14,7 @@ public class HealthBarManager : MonoBehaviour
     #endregion
 
     #region Serialized Variables
-    [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform healthBar;
-
     [SerializeField] private GameObject holder;
     #endregion
 
@@ -28,26 +26,6 @@ public class HealthBarManager : MonoBehaviour
 
     #endregion
 
-    #region Event Subscription
-    private void OnEnable()
-    {
-        SubscribeEvent();
-    }
-
-    private void SubscribeEvent()
-    {
-    }
-    private void UnSubscribeEvent()
-    {
-
-    }
-    private void OnDisable()
-    {
-        UnSubscribeEvent();
-    }
-    #endregion
-
-
     private void Awake()
     {
         Init();
@@ -57,9 +35,13 @@ public class HealthBarManager : MonoBehaviour
 
     }
 
-    private void Start()
+    public virtual void Start()
     {
         SetHealthBarScale(50);
+    }
+    public virtual void Update()
+    {
+
     }
 
     public void SetHealthBarScale(int currentValue, int maxValue = 50)//HealthBar increase or decrease with this method. This method can also listen a signal.
