@@ -54,5 +54,10 @@ namespace Controllers
             }
         }
 
+        public void OnEnemyDie()
+        {
+            PlayerSignals.Instance.onSlowMo?.Invoke(false);
+        }
+
     }
 }

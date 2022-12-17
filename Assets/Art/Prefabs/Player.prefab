@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30eb9aa9aeebc4a408b6f4868c4d3d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physicsController: {fileID: 5889515333437991161}
 --- !u!120 &5704370888501486885
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -342,8 +343,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.1782444, y: 0.08804375, z: 0.13063094}
-  m_Center: {x: -1.9041767, y: 0.12797682, z: -0.0066874176}
+  m_Size: {x: 3.1782446, y: 0.066961765, z: 0.06355162}
+  m_Center: {x: -1.9041767, y: 0.11360258, z: 0.001937069}
 --- !u!114 &5889515333437991161
 MonoBehaviour:
   m_ObjectHideFlags: 0

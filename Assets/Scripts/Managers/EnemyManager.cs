@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class LaserManager : MonoBehaviour
+    public class EnemyManager : MonoBehaviour
     {
         #region Self Variables
 
@@ -20,13 +20,22 @@ namespace Managers
         #endregion
 
         #region Serialized Variables
-        [SerializeField] private LaserPhysicsController physicsController;
+
         #endregion
 
         #region Private Variables
-        private LineRenderer _lRenderer;
+        private PlayerData _data;
         #endregion
+        #region Properties
+        private int _health;
 
+        public int Health
+        {
+            get { return _health; }
+            set { _health = value; }
+        }
+
+        #endregion
         #endregion
 
         private void Awake()
@@ -36,7 +45,7 @@ namespace Managers
 
         private void Init()
         {
-            _lRenderer = GetComponent<LineRenderer>();
+            _data = GetData();
         }
         public PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
 
@@ -49,13 +58,12 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            PlayerSignals.Instance.onEnemyDie += physicsController.OnEnemyDie;
 
         }
 
         private void UnsubscribeEvents()
         {
-            PlayerSignals.Instance.onEnemyDie -= physicsController.OnEnemyDie;
+
         }
 
 
@@ -65,32 +73,6 @@ namespace Managers
         }
 
         #endregion
-
-        private void Update()
-        {
-            DrawLaser();
-        }
-
-        private void DrawLaser()
-        {
-            _lRenderer.SetPosition(0, transform.position);
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 1000))
-            {
-                if (hit.collider)
-                {
-                    //Debug.Log(isSlowMo);
-                    //PlayerSignals.Instance.onSlowMo?.Invoke(isSlowMo);
-                    _lRenderer.SetPosition(1, hit.point);
-
-                }
-            }
-            else
-            {
-                _lRenderer.SetPosition(1, transform.forward * 5000);
-            }
-
-        }
 
         private void OnPlay()
         {
