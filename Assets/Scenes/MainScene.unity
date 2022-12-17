@@ -2815,6 +2815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 969769659}
+  - component: {fileID: 969769660}
   m_Layer: 0
   m_Name: BulletGUI
   m_TagString: Untagged
@@ -2838,6 +2839,19 @@ Transform:
   m_Father: {fileID: 1338845677}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &969769660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969769658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3678214a135f274ab7d83d597f3b9de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletText: {fileID: 2469029}
 --- !u!1 &975925021
 GameObject:
   m_ObjectHideFlags: 0

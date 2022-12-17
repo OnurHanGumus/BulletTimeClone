@@ -26,9 +26,10 @@ namespace Managers
 
         #region Private Variables
         private PlayerData _data;
-        private int _bulletCount = 176;
+        private int _bulletCount = 25;
         private int _currentLoad = 17;
         private int _loadCapacity = 17;
+        private bool _isReloading = false;
 
 
         #endregion
@@ -95,6 +96,11 @@ namespace Managers
         private void Reload()
         {
             Debug.Log("Reloading");
+            if (_isReloading)
+            {
+                return;
+            }
+            _isReloading = true;
             StartCoroutine(Reloading());
         }
 
@@ -102,22 +108,27 @@ namespace Managers
         {
             yield return new WaitForSeconds(1f);
             int remainBullet = _bulletCount - _loadCapacity;
-            remainBullet -= _loadCapacity;
+
             if (remainBullet > 0)
             {
+                _bulletCount -= _loadCapacity;
                 _currentLoad = _loadCapacity;
             }
             else
             {
-                _currentLoad = remainBullet;
+                _currentLoad = _bulletCount;
+                _bulletCount = 0;
+                //Failed
             }
-            Debug.Log(_currentLoad);
-            PlayerSignals.Instance.onReloaded?.Invoke(_currentLoad);
+
+            PlayerSignals.Instance.onReloaded?.Invoke(_currentLoad, _bulletCount);
+            _isReloading = false;
+
         }
 
         private void CreateBullet()
         {
-            --_currentLoad;
+            PlayerSignals.Instance.onShooted?.Invoke(--_currentLoad, _bulletCount);
             GameObject bullet = PoolSignals.Instance.onGetObject(PoolEnums.Bullet);
             bullet.transform.position = transform.position;
             bullet.transform.eulerAngles = transform.eulerAngles;

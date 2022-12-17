@@ -57,7 +57,7 @@ namespace Managers
             CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
             CoreGameSignals.Instance.onLevelFailed += _movementController.OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful += _movementController.OnLevelSuccess;
-            InputSignals.Instance.onClicked += _movementController.OnClicked;
+            PlayerSignals.Instance.onShooted += _movementController.OnShooted;
             PlayerSignals.Instance.onSlowMo += _movementController.OnSlowMo;
 
         }
@@ -70,7 +70,7 @@ namespace Managers
             CoreGameSignals.Instance.onRestartLevel -= OnResetLevel;
             CoreGameSignals.Instance.onLevelFailed -= _movementController.OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful -= _movementController.OnLevelSuccess;
-            InputSignals.Instance.onClicked -= _movementController.OnClicked;
+            PlayerSignals.Instance.onShooted -= _movementController.OnShooted;
             PlayerSignals.Instance.onSlowMo -= _movementController.OnSlowMo;
         }
 

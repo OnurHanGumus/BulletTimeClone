@@ -1,12 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using Data.ValueObject;
-using Enums;
 using Managers;
-using Signals;
 using UnityEngine;
-using DG.Tweening;
-using System;
 
 namespace Controllers
 {
@@ -21,7 +15,7 @@ namespace Controllers
         private PlayerManager _manager;
         private PlayerData _data;
 
-        private bool _isClicked = false;
+        private bool _isShooted = false;
 
         private bool _isNotStarted = true;
         private bool _isGameOver = false;
@@ -71,11 +65,11 @@ namespace Controllers
 
         private void AddForceToPlayer()
         {
-            if (!_isClicked)
+            if (!_isShooted)
             {
                 return;
             }
-            _isClicked = false;
+            _isShooted = false;
 
             if (_isSlowMo)
             {
@@ -103,13 +97,18 @@ namespace Controllers
 
         public void OnClicked()
         {
-            _isClicked = true;
+            
+        }
+
+        public void OnShooted(int currentLoadCount, int totalAmmoCount)
+        {
+            _isShooted = true;
             _isRight = !_isRight;
         }
 
         public void OnReleased()
         {
-            _isClicked = false;
+            _isShooted = false;
         }
 
 

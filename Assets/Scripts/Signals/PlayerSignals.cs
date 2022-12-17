@@ -10,6 +10,7 @@ namespace Signals
     {
         public UnityAction<bool> onSlowMo = delegate { };
         public UnityAction onEnemyDie = delegate { };
-        public UnityAction<int> onReloaded = delegate { };
+        public UnityAction<int,int> onShooted = delegate { };
+        public UnityAction<int,int> onReloaded = delegate { };
     }
 }
