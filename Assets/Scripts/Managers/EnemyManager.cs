@@ -20,14 +20,16 @@ namespace Managers
         #endregion
 
         #region Serialized Variables
-
+        [SerializeField] private HealthBarManager healthBarManager;
         #endregion
 
         #region Private Variables
         private PlayerData _data;
+        private bool _isDead = false;
+
         #endregion
         #region Properties
-        private int _health;
+        private int _health = 50;
 
         public int Health
         {
@@ -73,11 +75,28 @@ namespace Managers
         }
 
         #endregion
-
+        public void GetDamage()
+        {
+            Health -= 10;
+            Debug.Log(Health);
+            healthBarManager.SetHealthBarScale(Health);
+            if (Health <= 0 && !_isDead)
+            {
+                _isDead = true;
+                EnemyDie();
+            }
+        }
+        private void EnemyDie()
+        {
+            PlayerSignals.Instance.onEnemyDie?.Invoke();
+            Destroy(gameObject);
+        }
         private void OnPlay()
         {
 
         }
+
+        
 
         private void OnResetLevel()
         {

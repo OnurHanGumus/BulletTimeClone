@@ -29,7 +29,7 @@ public class HealthBarManager : MonoBehaviour
     #endregion
 
     #region Event Subscription
-    private void Start()
+    private void OnEnable()
     {
         SubscribeEvent();
     }
@@ -57,8 +57,14 @@ public class HealthBarManager : MonoBehaviour
 
     }
 
-    public void SetHealthBarScale(int currentValue, int maxValue)//HealthBar increase or decrease with this method. This method can also listen a signal.
+    private void Start()
+    {
+        SetHealthBarScale(50);
+    }
+
+    public void SetHealthBarScale(int currentValue, int maxValue = 50)//HealthBar increase or decrease with this method. This method can also listen a signal.
     {
         healthBar.localScale = new Vector3((float)currentValue / maxValue, 1, 1);
+        HealthText.text = currentValue.ToString();
     }
 }
