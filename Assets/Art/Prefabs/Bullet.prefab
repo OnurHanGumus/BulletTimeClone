@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1189761986099144949}
   - component: {fileID: 1189761986099144948}
   - component: {fileID: 1189761986099144951}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 1189761986236600975}
   - component: {fileID: 6348767922014130606}
   - component: {fileID: 9161045434730111469}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Physics
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 6173605075029704379}
   - component: {fileID: 4955337835572057698}
   - component: {fileID: 8350705508404033259}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

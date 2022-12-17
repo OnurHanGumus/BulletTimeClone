@@ -79,9 +79,8 @@ namespace Managers
             {
                 if (hit.collider)
                 {
-                    bool isSlowMo = hit.collider.CompareTag("Enemy");
-                    Debug.Log(isSlowMo);
-                    PlayerSignals.Instance.onSlowMo?.Invoke(isSlowMo);
+                    //Debug.Log(isSlowMo);
+                    //PlayerSignals.Instance.onSlowMo?.Invoke(isSlowMo);
                     _lRenderer.SetPosition(1, hit.point);
 
                 }
