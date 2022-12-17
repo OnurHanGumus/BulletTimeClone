@@ -1,9 +1,10 @@
+using Data.ValueObject;
+using Data.UnityObject;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Data.ValueObject;
-using Data.UnityObject;
-public class PlayerHealthBarController : AbstractHealthBar
+
+public class PlayerGUIController : MonoBehaviour
 {
     #region Self Variables
 
@@ -23,7 +24,6 @@ public class PlayerHealthBarController : AbstractHealthBar
     #endregion
 
     #endregion
-
     private void Awake()
     {
         Init();
@@ -32,18 +32,15 @@ public class PlayerHealthBarController : AbstractHealthBar
     private void Init()
     {
         _data = GetData();
-        base.SetHealthBarScale((int)_data.Health, (int)_data.Health);
     }
     private PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
-
-
-    public override void Start()
+    void Start()
     {
         
     }
 
-    //public override void Update()
-    //{
-    //    transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y + _data.HealthBarPosY, transform.position.z);
-    //}
+    public void Update()
+    {
+        transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, transform.position.z);
+    }
 }

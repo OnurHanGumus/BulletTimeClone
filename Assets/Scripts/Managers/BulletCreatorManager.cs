@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Commands;
 using Controllers;
@@ -25,6 +26,10 @@ namespace Managers
 
         #region Private Variables
         private PlayerData _data;
+        private int _bulletCount = 176;
+        private int _currentLoad = 17;
+        private int _loadCapacity = 17;
+
 
         #endregion
 
@@ -77,15 +82,51 @@ namespace Managers
 
         private void OnClicked()
         {
-            CreateBullet();
+            if (_currentLoad <= 0)
+            {
+                Reload();
+            }
+            else
+            {
+                CreateBullet();
+            }
+        }
+
+        private void Reload()
+        {
+            Debug.Log("Reloading");
+            StartCoroutine(Reloading());
+        }
+
+        private IEnumerator Reloading()
+        {
+            yield return new WaitForSeconds(1f);
+            int remainBullet = _bulletCount - _loadCapacity;
+            remainBullet -= _loadCapacity;
+            if (remainBullet > 0)
+            {
+                _currentLoad = _loadCapacity;
+            }
+            else
+            {
+                _currentLoad = remainBullet;
+            }
+            Debug.Log(_currentLoad);
+            PlayerSignals.Instance.onReloaded?.Invoke(_currentLoad);
         }
 
         private void CreateBullet()
         {
+            --_currentLoad;
             GameObject bullet = PoolSignals.Instance.onGetObject(PoolEnums.Bullet);
             bullet.transform.position = transform.position;
             bullet.transform.eulerAngles = transform.eulerAngles;
             bullet.SetActive(true);
+        }
+
+        private int GetCurrentLoad()
+        {
+            return _currentLoad;
         }
 
         private void OnResetLevel()
