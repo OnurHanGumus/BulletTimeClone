@@ -64,7 +64,6 @@ namespace Controllers
             if (_isSlowMo)
             {
                 _rig.angularVelocity = Vector3.zero;
-                Debug.Log("merhaba");
                 return;
             }
             _rig.AddRelativeTorque(new Vector3(0, 0, _data.Speed * (_isRight ? 1 : -1)),ForceMode.Impulse);
@@ -77,6 +76,12 @@ namespace Controllers
                 return;
             }
             _isClicked = false;
+
+            if (_isSlowMo)
+            {
+                return;
+            }
+
 
             _rig.velocity = new Vector3(0, 0);
             if (transform.eulerAngles.z > 0 && transform.eulerAngles.z < 90)

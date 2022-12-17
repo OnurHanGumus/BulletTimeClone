@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class LaserManager : MonoBehaviour
+    public class TimeManager : MonoBehaviour
     {
         #region Self Variables
 
@@ -24,7 +24,7 @@ namespace Managers
         #endregion
 
         #region Private Variables
-        private LineRenderer _lRenderer;
+
         #endregion
 
         #endregion
@@ -36,7 +36,7 @@ namespace Managers
 
         private void Init()
         {
-            _lRenderer = GetComponent<LineRenderer>();
+
         }
         public PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
 
@@ -50,12 +50,14 @@ namespace Managers
         private void SubscribeEvents()
         {
 
+            PlayerSignals.Instance.onSlowMo += OnSlowMo;
 
         }
 
         private void UnsubscribeEvents()
         {
 
+            PlayerSignals.Instance.onSlowMo -= OnSlowMo;
         }
 
 
@@ -66,36 +68,21 @@ namespace Managers
 
         #endregion
 
-        private void Update()
-        {
-            DrawLaser();
-        }
-
-        private void DrawLaser()
-        {
-            _lRenderer.SetPosition(0, transform.position);
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 1000))
-            {
-                if (hit.collider)
-                {
-                    bool isSlowMo = hit.collider.CompareTag("Enemy");
-                    Debug.Log(isSlowMo);
-                    PlayerSignals.Instance.onSlowMo?.Invoke(isSlowMo);
-                    _lRenderer.SetPosition(1, hit.point);
-
-                }
-            }
-            else
-            {
-                _lRenderer.SetPosition(1, transform.forward * 5000);
-            }
-
-        }
-
         private void OnPlay()
         {
 
+        }
+
+        private void OnSlowMo(bool isSlowMo)
+        {
+            if (isSlowMo)
+            {
+                Time.timeScale = 0.5f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
         }
 
         private void OnResetLevel()
