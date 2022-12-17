@@ -24,7 +24,7 @@ namespace Managers
         #endregion
 
         #region Private Variables
-        private PlayerData _data;
+        private EnemyData _data;
         private bool _isDead = false;
 
         #endregion
@@ -48,8 +48,9 @@ namespace Managers
         private void Init()
         {
             _data = GetData();
+            Health = _data.Health;
         }
-        public PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
+        public EnemyData GetData() => Resources.Load<CD_Enemy>("Data/EnemyData").Data;
 
         #region Event Subscription
 
