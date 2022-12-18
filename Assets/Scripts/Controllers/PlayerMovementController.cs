@@ -115,15 +115,22 @@ namespace Controllers
         public void OnPlay()
         {
             _isNotStarted = false;
+            _rig.useGravity = true;
+
 
         }
         public void OnLevelFailed()
         {
-            
+            _rig.angularVelocity = Vector3.zero;
+            _rig.velocity = Vector3.zero;
+            _rig.useGravity = false;
+
         }
         public void OnLevelSuccess()
         {
-            
+            _rig.angularVelocity = Vector3.zero;
+            _rig.velocity = Vector3.zero;
+            _rig.useGravity = false;
         }
         public void OnSlowMo(bool state)
         {

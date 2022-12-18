@@ -89,6 +89,9 @@ namespace Managers
 
         private void OnClicked()
         {
+
+            CheckLooseCase();
+
             if (_currentLoad <= 0)
             {
                 Reload();
@@ -99,9 +102,17 @@ namespace Managers
             }
         }
 
+        private void CheckLooseCase()
+        {
+            if (_currentLoad <= 0 && _bulletCount <= 0)
+            {
+                //Failed
+                CoreGameSignals.Instance.onLevelFailed?.Invoke();
+            }
+        }
+
         private void Reload()
         {
-            Debug.Log("Reloading");
             if (_isReloading)
             {
                 return;
@@ -124,8 +135,8 @@ namespace Managers
             {
                 _currentLoad = _bulletCount;
                 _bulletCount = 0;
-                //Failed
             }
+
 
             PlayerSignals.Instance.onReloaded?.Invoke(_currentLoad, _bulletCount);
             _isReloading = false;
