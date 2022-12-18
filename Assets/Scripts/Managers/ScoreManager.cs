@@ -61,7 +61,7 @@ namespace Managers
         {
             ScoreSignals.Instance.onScoreIncrease += OnScoreIncrease;
             ScoreSignals.Instance.onScoreDecrease += OnScoreDecrease;
-            ScoreSignals.Instance.onGetScore += OnGetScore;
+            ScoreSignals.Instance.onGetMoney += OnGetMoney;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
         }
@@ -70,7 +70,7 @@ namespace Managers
         {
             ScoreSignals.Instance.onScoreIncrease -= OnScoreIncrease;
             ScoreSignals.Instance.onScoreDecrease -= OnScoreDecrease;
-            ScoreSignals.Instance.onGetScore -= OnGetScore;
+            ScoreSignals.Instance.onGetMoney -= OnGetMoney;
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
         }
@@ -97,7 +97,7 @@ namespace Managers
         }
 
 
-        private int OnGetScore()
+        private int OnGetMoney()
         {
             return Money;
         }

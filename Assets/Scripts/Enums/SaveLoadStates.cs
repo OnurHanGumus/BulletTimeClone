@@ -10,5 +10,6 @@ namespace Enums
         SoundState,
         Level,
         Money,
+        PlayerImprovements,
     }
 }
