@@ -85,11 +85,10 @@ namespace Managers
 
             if (ScoreSignals.Instance.onGetMoney() > _data.itemPrices[id].prices[itemLevels[id]])
             {
-
+                ScoreSignals.Instance.onScoreDecrease(ScoreTypeEnums.Money, _data.itemPrices[id].prices[itemLevels[id]]);
                 itemLevels[id] = itemLevels[id] + 1;
                 SaveSignals.Instance.onUpgradePlayer?.Invoke(itemLevels, SaveLoadStates.PlayerImprovements,SaveFiles.SaveFile);
                 UpdateTexts();
-                Debug.Log("asdasd");
             }
         }
 
@@ -112,7 +111,7 @@ namespace Managers
                 {
 
                     levelTxt[i].text = "LEVEL " + (itemLevels[i] + 1).ToString();
-                    upgradeTxt[i].text = _data.itemPrices[i].prices[itemLevels[i]].ToString();
+                    upgradeTxt[i].text = _data.itemPrices[i].prices[itemLevels[i]].ToString() + "$";
                 }
                 else
                 {

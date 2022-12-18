@@ -93,7 +93,9 @@ namespace Managers
 
         private void OnScoreDecrease(ScoreTypeEnums type, int amount)
         {
-
+            Money -= amount;
+            UISignals.Instance.onSetChangedText?.Invoke(type, Money);
+            SaveSignals.Instance.onSaveScore(Money, SaveLoadStates.Money, SaveFiles.SaveFile);
         }
 
 
