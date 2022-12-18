@@ -10,6 +10,7 @@ namespace Signals
     {
         public Func<int> onGetEnemyCount = delegate { return 0; };
         public UnityAction onEnemyDie = delegate { };
+        public UnityAction onEnemyArrived = delegate { };
 
 
     }

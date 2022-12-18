@@ -80,6 +80,11 @@ namespace Managers
         }
 
         #endregion
+
+        private void Start()
+        {
+            EnemySignals.Instance.onEnemyArrived?.Invoke();
+        }
         public void GetDamage()
         {
             Health -= _playerDamage;

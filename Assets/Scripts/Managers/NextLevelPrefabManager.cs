@@ -26,11 +26,11 @@ namespace Managers
         [SerializeField] private TextMeshPro nextLevelText;
         [SerializeField] private string readyText = "Next Level", notReadyText = "Kill enemies above.";
         [SerializeField] private BoxCollider myCollider;
+        [SerializeField]private int enemyCount = 0;
 
         #endregion
 
         #region Private Variables
-        private int _enemyCount = 0;
         private PlayerData _data;
         #endregion
 
@@ -57,12 +57,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             EnemySignals.Instance.onEnemyDie += OnEnemyDie;
+            EnemySignals.Instance.onEnemyArrived += OnEnemyArrived;
 
         }
 
         private void UnsubscribeEvents()
         {
             EnemySignals.Instance.onEnemyDie -= OnEnemyDie;
+            EnemySignals.Instance.onEnemyArrived -= OnEnemyArrived;
 
         }
 
@@ -75,12 +77,13 @@ namespace Managers
         #endregion
         private void Start()
         {
-            GetEnemyCount();
+            
         }
-        private void GetEnemyCount()
+
+        private void OnEnemyArrived()
         {
-            _enemyCount += EnemySignals.Instance.onGetEnemyCount();
-            if (_enemyCount > 0)
+            enemyCount += EnemySignals.Instance.onGetEnemyCount();
+            if (enemyCount > 0)
             {
                 CloseTheDoor();
             }
@@ -104,8 +107,8 @@ namespace Managers
         }
         private void OnEnemyDie()
         {
-            --_enemyCount;
-            if (_enemyCount.Equals(0))
+            --enemyCount;
+            if (enemyCount.Equals(0))
             {
                 NextLevelOpened();
             }
