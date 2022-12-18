@@ -19,6 +19,7 @@ public class LevelPanelController : MonoBehaviour
     #endregion
     #region Private Variables
     private int _levelId = 0;
+    private int _moneyCount = 0;
 
     #endregion
     #endregion
@@ -34,14 +35,22 @@ public class LevelPanelController : MonoBehaviour
     private void Start()
     {
         _levelId = SaveSignals.Instance.onGetScore(SaveLoadStates.Level, SaveFiles.SaveFile);
+
+        _moneyCount = SaveSignals.Instance.onGetScore(SaveLoadStates.Money, SaveFiles.SaveFile);
+        InitilizeMoneyText();
         UpdateLevelText();
 
     }
+    private void InitilizeMoneyText()
+    {
+        moneyText.text = _moneyCount.ToString();
 
+    }
     private void UpdateLevelText()
     {
         levelText.text = "LEVEL " + _levelId.ToString();
     }
+
     public void OnScoreUpdateText(ScoreTypeEnums type, int score)
     {
         if (type.Equals(ScoreTypeEnums.Money))
@@ -58,6 +67,6 @@ public class LevelPanelController : MonoBehaviour
 
     public void OnRestartLevel()
     {
-        moneyText.text = 0.ToString();
+       
     }
 }

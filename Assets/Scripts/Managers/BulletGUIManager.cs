@@ -35,6 +35,7 @@ namespace Managers
         private void Awake()
         {
             Init();
+            InitializeText();
         }
 
         private void Init()
@@ -55,6 +56,7 @@ namespace Managers
             InputSignals.Instance.onClicked += OnClicked;
             PlayerSignals.Instance.onShooted += OnShooted;
             PlayerSignals.Instance.onReloaded += OnReloaded;
+            CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
 
         }
 
@@ -62,7 +64,9 @@ namespace Managers
         {
 
             InputSignals.Instance.onClicked -= OnClicked;
+            PlayerSignals.Instance.onShooted -= OnShooted;
             PlayerSignals.Instance.onReloaded -= OnReloaded;
+            CoreGameSignals.Instance.onRestartLevel -= OnResetLevel;
 
         }
 
@@ -73,7 +77,11 @@ namespace Managers
         }
 
         #endregion
+        private void InitializeText()
+        {
+            bulletText.text = ("|||   " + _data.CurrentBulletCount + "/" + _data.TotalBulletCount);
 
+        }
 
         private void OnPlay()
         {
@@ -97,7 +105,7 @@ namespace Managers
 
         private void OnResetLevel()
         {
-
+            InitializeText();
         }
     }
 }

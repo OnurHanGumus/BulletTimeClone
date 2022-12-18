@@ -39,11 +39,19 @@ namespace Managers
         private void Awake()
         {
             Init();
+            SetVariables();
         }
 
         private void Init()
         {
             _data = GetData();
+        }
+
+        private void SetVariables()
+        {
+            _bulletCount = _data.TotalBulletCount;
+            _currentLoad = _data.CurrentBulletCount;
+            _loadCapacity = _data.CurrentBulletCount;
         }
         public PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
 
@@ -57,15 +65,13 @@ namespace Managers
         private void SubscribeEvents()
         {
             InputSignals.Instance.onClicked += OnClicked;
-
-
+            CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
         }
 
         private void UnsubscribeEvents()
         {
-
             InputSignals.Instance.onClicked -= OnClicked;
-
+            CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
         }
 
 
@@ -142,7 +148,7 @@ namespace Managers
 
         private void OnResetLevel()
         {
-
+            SetVariables();
         }
     }
 }

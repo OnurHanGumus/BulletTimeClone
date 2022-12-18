@@ -129,11 +129,15 @@ namespace Controllers
         {
             _isSlowMo = state;
         }
-        public void OnReset()
+        public void OnRestartLevel()
         {
+            _isNotStarted = true;
+            _rig.angularVelocity = Vector3.zero;
+            _rig.velocity = Vector3.zero;
             //_isNotStarted = true;
             _isGameOver = false;
-            //transform.position = new Vector3(_data.InitializePosX, _data.InitializePosY);
+            transform.position = new Vector3(_data.InitializePosX, _data.InitializePosY);
+            transform.eulerAngles = Vector3.zero;
         }
     }
 }

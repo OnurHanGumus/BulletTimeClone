@@ -42,14 +42,8 @@ namespace Controllers
             if (other.CompareTag("Player"))
             {
                 ScoreSignals.Instance.onScoreIncrease?.Invoke(ScoreTypeEnums.Money, 10);
-                RiseToScorePanel();
+                transform.parent.gameObject.SetActive(false);
             }
-        }
-
-        private void RiseToScorePanel()
-        {
-            var pos = new Vector3(1006, 1893, 5);
-            transform.parent.DOMove(Camera.main.ScreenToWorldPoint(pos), 1f);
         }
 
        

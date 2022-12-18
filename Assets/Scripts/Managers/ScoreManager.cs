@@ -63,6 +63,7 @@ namespace Managers
             ScoreSignals.Instance.onScoreDecrease += OnScoreDecrease;
             ScoreSignals.Instance.onGetScore += OnGetScore;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
+            CoreGameSignals.Instance.onNextLevel += OnNextLevel;
         }
 
         private void UnsubscribeEvents()
@@ -71,6 +72,7 @@ namespace Managers
             ScoreSignals.Instance.onScoreDecrease -= OnScoreDecrease;
             ScoreSignals.Instance.onGetScore -= OnGetScore;
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
+            CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
         }
 
         private void OnDisable()
@@ -79,7 +81,10 @@ namespace Managers
         }
 
         #endregion
-
+        private void Start()
+        {
+            Money = SaveSignals.Instance.onGetScore(SaveLoadStates.Money, SaveFiles.SaveFile);
+        }
         private void OnScoreIncrease(ScoreTypeEnums type, int amount)
         {
             Money += amount;
@@ -97,9 +102,14 @@ namespace Managers
             return Money;
         }
 
+        private void OnNextLevel()
+        {
+            SaveSignals.Instance.onSaveScore(Money, SaveLoadStates.Money, SaveFiles.SaveFile);
+        }
+
         private void OnRestartLevel()
         {
-            Money = 0;
+            
         }
     }
 }

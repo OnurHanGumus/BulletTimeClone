@@ -53,7 +53,7 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay += _movementController.OnPlay;
             CoreGameSignals.Instance.onPlay += OnPlay;
-            CoreGameSignals.Instance.onRestartLevel += _movementController.OnReset;
+            CoreGameSignals.Instance.onRestartLevel += _movementController.OnRestartLevel;
             CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
             CoreGameSignals.Instance.onLevelFailed += _movementController.OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful += _movementController.OnLevelSuccess;
@@ -66,7 +66,7 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay -= _movementController.OnPlay;
             CoreGameSignals.Instance.onPlay -= OnPlay;
-            CoreGameSignals.Instance.onRestartLevel -= _movementController.OnReset;
+            CoreGameSignals.Instance.onRestartLevel -= _movementController.OnRestartLevel;
             CoreGameSignals.Instance.onRestartLevel -= OnResetLevel;
             CoreGameSignals.Instance.onLevelFailed -= _movementController.OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful -= _movementController.OnLevelSuccess;
@@ -81,7 +81,9 @@ namespace Managers
         }
 
         #endregion
-
+        private void Update()
+        {
+        }
         private void OnPlay()
         {
 
