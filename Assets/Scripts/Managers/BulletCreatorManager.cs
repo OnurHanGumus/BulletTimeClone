@@ -32,7 +32,7 @@ namespace Managers
         private bool _isReloading = false;
 
         private List<int> _playerUpgradeList;
-
+        private float _reloadTime = 1f;
         #endregion
 
         #endregion
@@ -53,6 +53,7 @@ namespace Managers
             _bulletCount = _data.TotalBulletCount;
             _currentLoad = _data.CurrentBulletCount;
             _loadCapacity = _data.CurrentBulletCount;
+            _reloadTime = _data.ReloadTime;
         }
 
 
@@ -96,15 +97,16 @@ namespace Managers
 
         }
         
-        private void AddUpgradedBullets()
+        private void AddUpgradesToValues()
         {
             _bulletCount += _playerUpgradeList[1] * _data.BulletIncreaseValue;
+            _reloadTime -= _playerUpgradeList[2] * _data.ReloadTimeDecreaseValue;
 
         }
 
         private void OnPlay()
         {
-            AddUpgradedBullets();
+            AddUpgradesToValues();
         }
 
         private void OnClicked()
@@ -143,7 +145,7 @@ namespace Managers
 
         private IEnumerator Reloading()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(_reloadTime);
             int remainBullet = _bulletCount - _loadCapacity;
 
             if (remainBullet > 0)

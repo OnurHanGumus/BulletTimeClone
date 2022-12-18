@@ -11,9 +11,10 @@ namespace Data.ValueObject
         public float Health = 100;
         public float InitializePosX = 0, InitializePosY = 0;
         public int DefaultDamage = 10;
+        public float ReloadTime = 1f;
 
         public int DamageIncreaseValue = 2, BulletIncreaseValue = 17;
-        public float ReloadTimeDecreaseValue = 0.2f;
+        public float ReloadTimeDecreaseValue = 0.15f;
 
         public int TotalBulletCount = 51, CurrentBulletCount = 17;
 
