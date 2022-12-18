@@ -60,7 +60,7 @@ public class LevelPanelController : MonoBehaviour
     }
     public void OnNextLevel()
     {
-        _levelId = LevelSignals.Instance.onGetLevel();
+        ++_levelId;
         UpdateLevelText();
     }
     
