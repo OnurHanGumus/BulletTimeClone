@@ -26,6 +26,7 @@ namespace Managers
         #region Private Variables
         private EnemyData _data;
         private bool _isDead = false;
+        private int _playerDamage = 0;
 
         #endregion
         #region Properties
@@ -62,11 +63,13 @@ namespace Managers
         private void SubscribeEvents()
         {
             EnemySignals.Instance.onGetEnemyCount += OnGetEnemyCount;
+            PlayerSignals.Instance.onSendPlayerDamage += OnSendPlayerDamage;
         }
 
         private void UnsubscribeEvents()
         {
             EnemySignals.Instance.onGetEnemyCount -= OnGetEnemyCount;
+            PlayerSignals.Instance.onSendPlayerDamage -= OnSendPlayerDamage;
 
         }
 
@@ -79,7 +82,7 @@ namespace Managers
         #endregion
         public void GetDamage()
         {
-            Health -= 10;
+            Health -= _playerDamage;
             healthBarManager.SetHealthBarScale(Health);
             if (Health <= 0 && !_isDead)
             {
@@ -96,6 +99,11 @@ namespace Managers
         private int OnGetEnemyCount()
         {
             return 1;
+        }
+
+        private void OnSendPlayerDamage(int damage)
+        {
+            _playerDamage = damage;
         }
         private void OnPlay()
         {

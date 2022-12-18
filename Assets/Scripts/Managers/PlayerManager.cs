@@ -26,6 +26,7 @@ namespace Managers
         #region Private Variables
         private PlayerData _data;
         private PlayerMovementController _movementController;
+        private List<int> _playerUpgradeList;
         #endregion
 
         #endregion
@@ -59,6 +60,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelSuccessful += _movementController.OnLevelSuccess;
             PlayerSignals.Instance.onShooted += _movementController.OnShooted;
             PlayerSignals.Instance.onSlowMo += _movementController.OnSlowMo;
+            SaveSignals.Instance.onInitializePlayerUpgrades += OnInitializePlayerUpgrades;
 
         }
 
@@ -72,6 +74,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelSuccessful -= _movementController.OnLevelSuccess;
             PlayerSignals.Instance.onShooted -= _movementController.OnShooted;
             PlayerSignals.Instance.onSlowMo -= _movementController.OnSlowMo;
+            SaveSignals.Instance.onInitializePlayerUpgrades -= OnInitializePlayerUpgrades;
         }
 
 
@@ -81,13 +84,17 @@ namespace Managers
         }
 
         #endregion
-        private void Update()
-        {
-        }
         private void OnPlay()
         {
-
+            PlayerSignals.Instance.onSendPlayerDamage?.Invoke(_playerUpgradeList[0] * _data.DamageIncreaseValue + _data.DefaultDamage);
         }
+
+        private void OnInitializePlayerUpgrades(List<int> upgradeList)
+        {
+            _playerUpgradeList = upgradeList;
+        }
+
+
         private void OnResetLevel()
         {
 
