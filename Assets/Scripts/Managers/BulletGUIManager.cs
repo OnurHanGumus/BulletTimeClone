@@ -56,7 +56,9 @@ namespace Managers
             InputSignals.Instance.onClicked += OnClicked;
             PlayerSignals.Instance.onShooted += OnShooted;
             PlayerSignals.Instance.onReloaded += OnReloaded;
+
             CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
+            CoreGameSignals.Instance.onPlay += OnPlay;
 
         }
 
@@ -66,7 +68,9 @@ namespace Managers
             InputSignals.Instance.onClicked -= OnClicked;
             PlayerSignals.Instance.onShooted -= OnShooted;
             PlayerSignals.Instance.onReloaded -= OnReloaded;
+
             CoreGameSignals.Instance.onRestartLevel -= OnResetLevel;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
 
         }
 
@@ -85,7 +89,7 @@ namespace Managers
 
         private void OnPlay()
         {
-
+            
         }
 
         private void OnClicked()

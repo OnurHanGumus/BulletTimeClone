@@ -31,6 +31,7 @@ namespace Managers
         private int _loadCapacity = 17;
         private bool _isReloading = false;
 
+        private List<int> _playerUpgradeList;
 
         #endregion
 
@@ -40,8 +41,8 @@ namespace Managers
         {
             Init();
             SetVariables();
-        }
 
+        }
         private void Init()
         {
             _data = GetData();
@@ -53,6 +54,9 @@ namespace Managers
             _currentLoad = _data.CurrentBulletCount;
             _loadCapacity = _data.CurrentBulletCount;
         }
+
+
+        
         public PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
 
         #region Event Subscription
@@ -66,12 +70,18 @@ namespace Managers
         {
             InputSignals.Instance.onClicked += OnClicked;
             CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
+            CoreGameSignals.Instance.onPlay += OnPlay;
+            SaveSignals.Instance.onInitializePlayerUpgrades += OnInitializePlayerUpgrades;
+
         }
 
         private void UnsubscribeEvents()
         {
             InputSignals.Instance.onClicked -= OnClicked;
-            CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
+            CoreGameSignals.Instance.onRestartLevel -= OnResetLevel;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
+            SaveSignals.Instance.onInitializePlayerUpgrades -= OnInitializePlayerUpgrades;
+
         }
 
 
@@ -81,10 +91,20 @@ namespace Managers
         }
 
         #endregion
+        private void Start()
+        {
+
+        }
+        
+        private void AddUpgradedBullets()
+        {
+            _bulletCount += _playerUpgradeList[1] * _data.BulletIncreaseValue;
+
+        }
 
         private void OnPlay()
         {
-
+            AddUpgradedBullets();
         }
 
         private void OnClicked()
@@ -140,7 +160,6 @@ namespace Managers
 
             PlayerSignals.Instance.onReloaded?.Invoke(_currentLoad, _bulletCount);
             _isReloading = false;
-
         }
 
         private void CreateBullet()
@@ -155,6 +174,11 @@ namespace Managers
         private int GetCurrentLoad()
         {
             return _currentLoad;
+        }
+
+        private void OnInitializePlayerUpgrades(List<int> upgradeList)
+        {
+            _playerUpgradeList = upgradeList;
         }
 
         private void OnResetLevel()
