@@ -18,7 +18,6 @@ namespace Controllers
         private bool _isShooted = false;
 
         private bool _isNotStarted = true;
-        private bool _isGameOver = false;
 
         private bool _isRight = false;
         private bool _isSlowMo = false;
@@ -60,6 +59,7 @@ namespace Controllers
                 _rig.angularVelocity = Vector3.zero;
                 return;
             }
+
             _rig.AddRelativeTorque(new Vector3(0, 0, _data.Speed * (_isRight ? 1 : -1)),ForceMode.Impulse);
         }
 
@@ -119,11 +119,11 @@ namespace Controllers
         }
         public void OnLevelFailed()
         {
-            _isGameOver = true;
+            
         }
         public void OnLevelSuccess()
         {
-            _isGameOver = true;
+            
         }
         public void OnSlowMo(bool state)
         {
@@ -135,9 +135,11 @@ namespace Controllers
             _rig.angularVelocity = Vector3.zero;
             _rig.velocity = Vector3.zero;
             //_isNotStarted = true;
-            _isGameOver = false;
             transform.position = new Vector3(_data.InitializePosX, _data.InitializePosY);
             transform.eulerAngles = Vector3.zero;
+            _isSlowMo = false;
+            _isRight = false;
+            _isShooted = false;
         }
     }
 }

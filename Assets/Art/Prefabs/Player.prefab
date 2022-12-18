@@ -187,7 +187,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0.002696991
-        value: 0.03012085
+        value: 0.03781128
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -389,8 +389,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.1782446, y: 0.066961765, z: 0.06355162}
-  m_Center: {x: -1.9041767, y: 0.11360258, z: 0.001937069}
+  m_Size: {x: 1.9517446, y: 0.066961765, z: 0.06355162}
+  m_Center: {x: -1.2909269, y: 0.11360258, z: 0.001937069}
 --- !u!114 &5889515333437991161
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -50,12 +50,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             EnemySignals.Instance.onEnemyDie += physicsController.OnEnemyDie;
+            CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
 
         }
 
         private void UnsubscribeEvents()
         {
             EnemySignals.Instance.onEnemyDie -= physicsController.OnEnemyDie;
+            CoreGameSignals.Instance.onRestartLevel -= OnResetLevel;
         }
 
 
@@ -79,8 +81,9 @@ namespace Managers
             {
                 if (hit.collider)
                 {
-                    //Debug.Log(isSlowMo);
+                    //bool isSlowMo = hit.collider.CompareTag("Enemy");
                     //PlayerSignals.Instance.onSlowMo?.Invoke(isSlowMo);
+
                     _lRenderer.SetPosition(1, hit.point);
 
                 }
@@ -99,7 +102,7 @@ namespace Managers
 
         private void OnResetLevel()
         {
-
+            PlayerSignals.Instance.onSlowMo?.Invoke(false);
         }
     }
 }
