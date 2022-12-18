@@ -49,13 +49,13 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            PlayerSignals.Instance.onEnemyDie += physicsController.OnEnemyDie;
+            EnemySignals.Instance.onEnemyDie += physicsController.OnEnemyDie;
 
         }
 
         private void UnsubscribeEvents()
         {
-            PlayerSignals.Instance.onEnemyDie -= physicsController.OnEnemyDie;
+            EnemySignals.Instance.onEnemyDie -= physicsController.OnEnemyDie;
         }
 
 

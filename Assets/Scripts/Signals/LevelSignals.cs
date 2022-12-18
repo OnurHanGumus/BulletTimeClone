@@ -10,5 +10,7 @@ namespace Signals
     public class LevelSignals : MonoSingleton<LevelSignals>
     {
         public Func<int> onGetCurrentModdedLevel = delegate { return 0; };
+        public Func<int> onGetLevel = delegate { return 0; };
+
     }
 }

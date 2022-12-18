@@ -86,11 +86,6 @@ namespace Managers
         {
 
         }
-        private void Update()
-        {
-            var pos = new Vector3(transform.position.x, transform.position.y, 0);
-            Debug.Log(Camera.main.WorldToScreenPoint(pos));
-        }
         private void OnResetLevel()
         {
 

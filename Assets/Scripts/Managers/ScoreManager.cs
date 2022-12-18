@@ -29,12 +29,12 @@ namespace Managers
 
         #region Private Variables
 
-        private int _score;
+        private int _money;
         [ShowInInspector]
-        public int Score
+        public int Money
         {
-            get { return _score; }
-            set { _score = value; }
+            get { return _money; }
+            set { _money = value; }
         }
 
 
@@ -82,8 +82,8 @@ namespace Managers
 
         private void OnScoreIncrease(ScoreTypeEnums type, int amount)
         {
-            Score += amount;
-            UISignals.Instance.onSetChangedText?.Invoke(type, Score);
+            Money += amount;
+            UISignals.Instance.onSetChangedText?.Invoke(type, Money);
         }
 
         private void OnScoreDecrease(ScoreTypeEnums type, int amount)
@@ -94,12 +94,12 @@ namespace Managers
 
         private int OnGetScore()
         {
-            return Score;
+            return Money;
         }
 
         private void OnRestartLevel()
         {
-            Score = 0;
+            Money = 0;
         }
     }
 }

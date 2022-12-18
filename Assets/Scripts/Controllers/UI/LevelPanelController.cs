@@ -14,32 +14,50 @@ public class LevelPanelController : MonoBehaviour
     #region Public Variables
     #endregion
     #region SerializeField Variables
-    [SerializeField] private TextMeshProUGUI scoreTxt;
+    [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private TextMeshProUGUI levelText;
     #endregion
     #region Private Variables
-
+    private int _levelId = 0;
 
     #endregion
     #endregion
     private void Awake()
     {
         Init();
+
     }
     private void Init()
     {
+    }
 
+    private void Start()
+    {
+        _levelId = SaveSignals.Instance.onGetScore(SaveLoadStates.Level, SaveFiles.SaveFile);
+        UpdateLevelText();
 
+    }
+
+    private void UpdateLevelText()
+    {
+        levelText.text = "LEVEL " + _levelId.ToString();
     }
     public void OnScoreUpdateText(ScoreTypeEnums type, int score)
     {
-        if (type.Equals(ScoreTypeEnums.Score))
+        if (type.Equals(ScoreTypeEnums.Money))
         {
-            scoreTxt.text = score.ToString();
+            moneyText.text = score.ToString();
         }
     }
+    public void OnNextLevel()
+    {
+        _levelId = LevelSignals.Instance.onGetLevel();
+        UpdateLevelText();
+    }
+    
 
     public void OnRestartLevel()
     {
-        scoreTxt.text = 0.ToString();
+        moneyText.text = 0.ToString();
     }
 }

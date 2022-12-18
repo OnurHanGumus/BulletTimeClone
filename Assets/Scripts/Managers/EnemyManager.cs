@@ -61,11 +61,12 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-
+            EnemySignals.Instance.onGetEnemyCount += OnGetEnemyCount;
         }
 
         private void UnsubscribeEvents()
         {
+            EnemySignals.Instance.onGetEnemyCount -= OnGetEnemyCount;
 
         }
 
@@ -88,8 +89,13 @@ namespace Managers
         }
         private void EnemyDie()
         {
-            PlayerSignals.Instance.onEnemyDie?.Invoke();
+            EnemySignals.Instance.onEnemyDie?.Invoke();
             Destroy(gameObject);
+        }
+
+        private int OnGetEnemyCount()
+        {
+            return 1;
         }
         private void OnPlay()
         {

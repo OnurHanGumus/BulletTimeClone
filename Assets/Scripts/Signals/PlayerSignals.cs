@@ -9,7 +9,6 @@ namespace Signals
     public class PlayerSignals : MonoSingleton<PlayerSignals>
     {
         public UnityAction<bool> onSlowMo = delegate { };
-        public UnityAction onEnemyDie = delegate { };
         public UnityAction<int,int> onShooted = delegate { };
         public UnityAction<int,int> onReloaded = delegate { };
     }

@@ -38,13 +38,11 @@ namespace Managers
 
         private void Awake()
         {
-            _levelID = GetActiveLevel();
+            Init();
         }
 
-        private int GetActiveLevel()
+        private void Init()
         {
-            if (!ES3.FileExists()) return 0;
-            return ES3.KeyExists("Level") ? ES3.Load<int>("Level") : 0;
         }
 
 
@@ -61,7 +59,7 @@ namespace Managers
             CoreGameSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
-            CoreGameSignals.Instance.onGetLevelID += OnGetLevelID;
+            LevelSignals.Instance.onGetLevel += OnGetLevel;
 
         }
 
@@ -73,7 +71,7 @@ namespace Managers
             CoreGameSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
-            CoreGameSignals.Instance.onGetLevelID -= OnGetLevelID;
+            LevelSignals.Instance.onGetLevel -= OnGetLevel;
 
         }
 
@@ -86,6 +84,8 @@ namespace Managers
 
         private void Start()
         {
+            _levelID = SaveSignals.Instance.onGetScore(SaveLoadStates.Level, SaveFiles.SaveFile);
+
             OnInitializeLevel();
         }
 
@@ -94,8 +94,8 @@ namespace Managers
             _levelID++;
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
-            //CoreGameSignals.Instance.onSaveAndResetGameData?.Invoke();
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+            SaveSignals.Instance.onSaveScore?.Invoke(_levelID,SaveLoadStates.Level, SaveFiles.SaveFile);
         }
 
         private void OnRestartLevel()
@@ -106,7 +106,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
         }
 
-        private int OnGetLevelID()
+        private int OnGetLevel()
         {
             return _levelID;
         }
