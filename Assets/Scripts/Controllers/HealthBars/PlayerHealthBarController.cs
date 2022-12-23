@@ -42,8 +42,4 @@ public class PlayerHealthBarController : AbstractHealthBar
         
     }
 
-    //public override void Update()
-    //{
-    //    transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y + _data.HealthBarPosY, transform.position.z);
-    //}
 }

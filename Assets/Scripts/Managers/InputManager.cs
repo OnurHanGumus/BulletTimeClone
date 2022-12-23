@@ -118,7 +118,7 @@ namespace Managers
 
         private bool IsPointerOverUIElement()
         {
-            return EventSystem.current.IsPointerOverGameObject();
+            return EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0);
         }
 
         private void OnReset()

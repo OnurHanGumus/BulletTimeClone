@@ -7,7 +7,6 @@ using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Signals;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Managers
@@ -145,6 +144,7 @@ namespace Managers
 
         private IEnumerator Reloading()
         {
+            PlayerSignals.Instance.onReloading?.Invoke();
             yield return new WaitForSeconds(_reloadTime);
             int remainBullet = _bulletCount - _loadCapacity;
 
@@ -160,7 +160,7 @@ namespace Managers
             }
 
 
-            PlayerSignals.Instance.onReloaded?.Invoke(_currentLoad, _bulletCount);
+            PlayerSignals.Instance.onHasReloaded?.Invoke(_currentLoad, _bulletCount);
             _isReloading = false;
         }
 

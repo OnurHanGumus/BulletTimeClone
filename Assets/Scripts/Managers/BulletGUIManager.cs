@@ -7,7 +7,6 @@ using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Signals;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using TMPro;
 
@@ -55,7 +54,7 @@ namespace Managers
         {
             InputSignals.Instance.onClicked += OnClicked;
             PlayerSignals.Instance.onShooted += OnShooted;
-            PlayerSignals.Instance.onReloaded += OnReloaded;
+            PlayerSignals.Instance.onHasReloaded += OnReloaded;
 
             CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
             CoreGameSignals.Instance.onPlay += OnPlay;
@@ -67,7 +66,7 @@ namespace Managers
 
             InputSignals.Instance.onClicked -= OnClicked;
             PlayerSignals.Instance.onShooted -= OnShooted;
-            PlayerSignals.Instance.onReloaded -= OnReloaded;
+            PlayerSignals.Instance.onHasReloaded -= OnReloaded;
 
             CoreGameSignals.Instance.onRestartLevel -= OnResetLevel;
             CoreGameSignals.Instance.onPlay -= OnPlay;

@@ -21,7 +21,7 @@ namespace Controllers
         #endregion
 
         #region Private Variables
-        
+        private bool _isPlayerReloading = false;
         #endregion
         #endregion
 
@@ -40,6 +40,10 @@ namespace Controllers
         {
             if (other.CompareTag("Enemy"))
             {
+                if (_isPlayerReloading)
+                {
+                    return;
+                }
                 PlayerSignals.Instance.onSlowMo?.Invoke(true);
 
             }
@@ -59,5 +63,16 @@ namespace Controllers
             PlayerSignals.Instance.onSlowMo?.Invoke(false);
         }
 
+        public void OnReloading()
+        {
+            PlayerSignals.Instance.onSlowMo?.Invoke(false);
+
+            _isPlayerReloading = true;
+        }
+
+        public void OnHasReloaded(int value, int value2)
+        {
+            _isPlayerReloading = false;
+        }
     }
 }

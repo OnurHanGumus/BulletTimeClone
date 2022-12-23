@@ -6,7 +6,6 @@ using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Signals;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Managers
@@ -51,6 +50,8 @@ namespace Managers
         {
             EnemySignals.Instance.onEnemyDie += physicsController.OnEnemyDie;
             CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
+            PlayerSignals.Instance.onReloading += physicsController.OnReloading;
+            PlayerSignals.Instance.onHasReloaded += physicsController.OnHasReloaded;
 
         }
 
@@ -58,6 +59,8 @@ namespace Managers
         {
             EnemySignals.Instance.onEnemyDie -= physicsController.OnEnemyDie;
             CoreGameSignals.Instance.onRestartLevel -= OnResetLevel;
+            PlayerSignals.Instance.onReloading -= physicsController.OnReloading;
+            PlayerSignals.Instance.onHasReloaded -= physicsController.OnHasReloaded;
         }
 
 

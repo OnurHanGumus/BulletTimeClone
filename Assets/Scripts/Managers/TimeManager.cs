@@ -6,7 +6,6 @@ using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Signals;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Managers
@@ -75,16 +74,14 @@ namespace Managers
 
         private void OnSlowMo(bool isSlowMo)
         {
-            if (isSlowMo)
-            {
-                Time.timeScale = 0.5f;
-            }
-            else
-            {
-                Time.timeScale = 1f;
-            }
+            SetTimeScale(isSlowMo ? 0.5f : 1f);
         }
 
+        private void SetTimeScale(float value)
+        {
+            Time.timeScale = value;
+
+        }
         private void OnResetLevel()
         {
 

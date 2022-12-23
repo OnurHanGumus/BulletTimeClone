@@ -6,7 +6,6 @@ using Enums;
 using Extentions;
 using Keys;
 using Signals;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Managers
@@ -30,7 +29,7 @@ namespace Managers
 
         #region Private Variables
 
-        [ShowInInspector] private int _levelID;
+        private int _levelID;
 
         #endregion
 
