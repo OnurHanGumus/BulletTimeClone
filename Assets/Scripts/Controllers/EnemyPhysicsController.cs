@@ -43,6 +43,7 @@ namespace Controllers
             if (other.CompareTag("Bullet"))
             {
                 manager.GetDamage();
+                AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Hit);
             }
         }
 

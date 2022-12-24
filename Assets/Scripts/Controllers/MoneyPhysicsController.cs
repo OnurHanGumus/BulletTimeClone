@@ -43,6 +43,7 @@ namespace Controllers
             {
                 ScoreSignals.Instance.onScoreIncrease?.Invoke(ScoreTypeEnums.Money, 10);
                 transform.parent.gameObject.SetActive(false);
+                AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Collect);
             }
         }
 

@@ -129,6 +129,8 @@ namespace Managers
             {
                 //Failed
                 CoreGameSignals.Instance.onLevelFailed?.Invoke();
+                AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Lose);
+
             }
         }
 
@@ -145,6 +147,8 @@ namespace Managers
         private IEnumerator Reloading()
         {
             PlayerSignals.Instance.onReloading?.Invoke();
+            AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Reload);
+
             yield return new WaitForSeconds(_reloadTime);
             int remainBullet = _bulletCount - _loadCapacity;
 
@@ -161,6 +165,7 @@ namespace Managers
 
 
             PlayerSignals.Instance.onHasReloaded?.Invoke(_currentLoad, _bulletCount);
+            AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Reload);
             _isReloading = false;
         }
 
@@ -171,6 +176,7 @@ namespace Managers
             bullet.transform.position = transform.position;
             bullet.transform.eulerAngles = transform.eulerAngles;
             bullet.SetActive(true);
+            AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Fire);
         }
 
         private int GetCurrentLoad()

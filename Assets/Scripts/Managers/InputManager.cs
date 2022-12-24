@@ -118,7 +118,12 @@ namespace Managers
 
         private bool IsPointerOverUIElement()
         {
-            return EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0);
+            var eventData = new PointerEventData(EventSystem.current);
+            eventData.position = Input.mousePosition;
+            var results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+            return results.Count > 0;
+            //return EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0);
         }
 
         private void OnReset()

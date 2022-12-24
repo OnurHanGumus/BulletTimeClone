@@ -20,6 +20,7 @@ namespace Controllers
         #endregion
 
         #region Private Variables
+        private bool _isFirstTime = false;
         #endregion
         #region Properties
         #endregion
@@ -41,7 +42,14 @@ namespace Controllers
         {
             if (other.CompareTag("Player"))
             {
+                if (_isFirstTime)
+                {
+                    return;
+                }
                 CoreGameSignals.Instance.onLevelSuccessful?.Invoke();
+                AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Win);
+                _isFirstTime = true;
+
             }
         }
 
